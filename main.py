@@ -2,7 +2,7 @@ import telebot
 from telebot.types import Message, ReplyKeyboardMarkup
 from wiktionary_parser import WiktionaryParser
 
-with open("token.env") as f:
+with open(".env") as f:
     TOKEN = f.readline().strip()
 
 bot = telebot.TeleBot(TOKEN)

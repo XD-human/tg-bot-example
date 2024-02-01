@@ -11,7 +11,7 @@
     ```commandline
     pip install -r requirements.txt
     ```
-3. Создайте файл `token.env` и добавьте в него токен вашего бота для Telegram
+3. Создайте файл `.env` и добавьте в него токен вашего бота для Telegram
    (полученного в Telegram от BotFather).
 
 ## Использование
