@@ -12,7 +12,10 @@
     pip install -r requirements.txt
     ```
 3. Создайте файл `.env` и добавьте в него токен вашего бота для Telegram
-   (полученного в Telegram от BotFather).
+   (полученного в Telegram от BotFather). Файл `.env` должен выглядеть следующим образом:
+   ```python
+   TOKEN = "YOUR_BOT_TOKEN"
+   ```
 
 ## Использование
 1. Для запуска бота используйте команду:
