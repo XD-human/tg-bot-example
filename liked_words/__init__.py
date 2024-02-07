@@ -1,7 +1,7 @@
 import sqlite3
 from sqlite3 import Connection, Cursor
 
-PATH = "../liked_words.db"
+PATH = "./liked_words.db"
 
 
 def connect() -> tuple[Connection, Cursor]:
@@ -32,9 +32,8 @@ def add_word(word: str):
     con.close()
 
 
-def remove_word(cls, word: str):
+def remove_word(word: str):
     con, cur = connect()
-    cls.cur.execute("DELETE FROM liked_words WHERE word=(?)", (word,))
-    cls.con.commit()
+    cur.execute("DELETE FROM liked_words WHERE word=(?)", (word,))
+    con.commit()
     con.close()
-
