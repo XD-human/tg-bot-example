@@ -80,9 +80,3 @@ class WiktionaryParser:
             example_detail.extract()
         for example_absent in element.findChildren("span", class_="example-absent"):
             example_absent.extract()
-
-
-if __name__ == "__main__":
-    definitions = WiktionaryParser.get_wiktionary_definition("кодить")
-    if definitions:
-        print("\n\n".join([a.__repr__() for a in definitions]))
