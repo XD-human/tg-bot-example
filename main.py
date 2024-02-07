@@ -1,7 +1,6 @@
 import telebot
 from telebot.types import (
     Message,
-    ReplyKeyboardMarkup,
     InlineKeyboardMarkup,
     InlineKeyboardButton,
 )
@@ -39,8 +38,18 @@ def help_user(message: Message):
         "Команды:\n"
         "/start - Запуск чат-бота\n"
         "/help - Вспомогательная справка\n\n"
+        "Избранные слова: ты можешь сохранять слова, чтобы потом вызвать их из памяти.\n"
+        "/save {слово} - сохранить слово в избранные.\n"
         "В основе работы бота лежит сайт https://ru.wiktionary.org/",
     )
+
+
+@bot.message_handler(regexp=r"save \w*")
+def save_word(message: Message):
+    word = message.text.removeprefix("/save").strip()
+    print(word)
+    liked_words.add_word(word)
+    return None
 
 
 @bot.message_handler()
