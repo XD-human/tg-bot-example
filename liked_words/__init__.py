@@ -1,33 +1,40 @@
 import sqlite3
+from sqlite3 import Connection, Cursor
+
+PATH = "../liked_words.db"
 
 
-class LikedWordsManager:
-    path = "../liked_words.db"
-    con = sqlite3.connect(path)
+def connect() -> tuple[Connection, Cursor]:
+    con = sqlite3.connect(PATH)
     cur = con.cursor()
-
-    @classmethod
-    def initialize(cls):
-        cls.cur.execute("""
-            CREATE TABLE "liked_words" (
-                "index"	INTEGER UNIQUE,
-                "word"	TEXT,
-                PRIMARY KEY("index" AUTOINCREMENT)
-            );
-        """)
-        cls.con.commit()
-
-    @classmethod
-    def add_word(cls, word: str):
-        cls.cur.execute("INSERT INTO liked_words (word) VALUES (?)", (word,))
-        cls.con.commit()
-
-    @classmethod
-    def remove_word(cls, word: str):
-        cls.cur.execute("DELETE FROM liked_words WHERE word=(?)", (word,))
-        cls.con.commit()
+    return con, cur
 
 
-if __name__ == "__main__":
-    LikedWordsManager.remove_word("слово")
-    LikedWordsManager.con.close()
+def initialize():
+    con, cur = connect()
+
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS "liked_words"  (
+            "index"	INTEGER UNIQUE,
+            "word"	TEXT,
+            PRIMARY KEY("index" AUTOINCREMENT)
+        );
+    """)
+
+    con.commit()
+    con.close()
+
+
+def add_word(word: str):
+    con, cur = connect()
+    cur.execute("INSERT INTO liked_words (word) VALUES (?)", (word,))
+    con.commit()
+    con.close()
+
+
+def remove_word(cls, word: str):
+    con, cur = connect()
+    cls.cur.execute("DELETE FROM liked_words WHERE word=(?)", (word,))
+    cls.con.commit()
+    con.close()
+
